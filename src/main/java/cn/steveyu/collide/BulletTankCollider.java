@@ -4,7 +4,7 @@ import cn.steveyu.gameObj.*;
 
 /**
  * 我放子弹敌方坦克碰撞器
- *
+ * <p>
  * 我方子弹碰到敌方坦克，子弹和坦克消失
  */
 public class BulletTankCollider implements Collider {
@@ -17,8 +17,8 @@ public class BulletTankCollider implements Collider {
         if (go1 instanceof Bullet && go2 instanceof Tank) {
             Bullet b = (Bullet) go1;
             Tank t = (Tank) go2;
-            if(b.isLive() && t.isLive() && b.getGroup() == Group.GOOD) {
-                if(b.getRect().intersects(t.getRect())){
+            if (b.isLive() && t.isLive() && b.getGroup() == Group.GOOD) {
+                if (b.getRect().intersects(t.getRect())) {
                     b.die();
                     t.die();
                 }

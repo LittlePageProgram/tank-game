@@ -107,7 +107,7 @@ public class Tank extends AbstractGameObject {
      * 开火方法
      */
     private void fire() {
-        if(random.nextInt(100) > 98){
+        if (random.nextInt(100) > 98) {
             TankFrame.INSTANCE.add(new Bullet(x, y, dir, Group.BAD));
         }
     }
@@ -125,7 +125,7 @@ public class Tank extends AbstractGameObject {
      * 随机方向
      */
     private void setRandomDir() {
-        if(random.nextInt(100) > 95 || this.dir == null){
+        if (random.nextInt(100) > 95 || this.dir == null) {
             this.dir = Dir.values()[random.nextInt(Dir.values().length)];
         }
     }

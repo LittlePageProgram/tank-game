@@ -8,7 +8,7 @@ import cn.steveyu.run.TankFrame;
 /**
  * 左右开火
  */
-public class LeftRightFireStrategy implements FireStrategy{
+public class LeftRightFireStrategy implements FireStrategy {
     @Override
     public void fire(Player player) {
         TankFrame.INSTANCE.add(new Bullet(player.getX(), player.getY(), Dir.L, player.getGroup()));

@@ -8,7 +8,7 @@ import cn.steveyu.run.TankFrame;
 /**
  * 四个方向开火
  */
-public class FourDirFireStrategy implements FireStrategy{
+public class FourDirFireStrategy implements FireStrategy {
     @Override
     public void fire(Player player) {
         for (Dir dir : Dir.values()) {

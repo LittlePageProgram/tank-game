@@ -47,10 +47,10 @@ public class TankFrame extends Frame {
             String[] collidersNames = PropertyMgr.get("colliders").split(",");
             for (String collidersName : collidersNames) {
                 Class<?> collideClazz = Class.forName("cn.steveyu.collide." + collidersName.trim());
-                Collider collider = (Collider)(collideClazz.getConstructor().newInstance());
+                Collider collider = (Collider) (collideClazz.getConstructor().newInstance());
                 colliders.add(collider);
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -64,12 +64,14 @@ public class TankFrame extends Frame {
     }
 
     private void addEnemyTank(int tankNumber) {
-        for(int i = 0; i < tankNumber; i++){
+        for (int i = 0; i < tankNumber; i++) {
             objects.add(new Tank(random.nextInt(GAME_WIDTH), random.nextInt(GAME_HEIGHT)));
         }
     }
 
-    public void add(AbstractGameObject abstractGameObject) { objects.add(abstractGameObject); }
+    public void add(AbstractGameObject abstractGameObject) {
+        objects.add(abstractGameObject);
+    }
 
     public static TankFrame getInstance() {
         if (INSTANCE == null) {
@@ -98,7 +100,6 @@ public class TankFrame extends Frame {
     }
 
 
-
     /**
      * repaint线程
      */
@@ -120,27 +121,27 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.white);
-        g.drawString("游戏组件个数：" + objects.size() , 10, 50);
+        g.drawString("游戏组件个数：" + objects.size(), 10, 50);
         g.setColor(c);
 
-        for(int i = 0; i < objects.size(); i++) {
+        for (int i = 0; i < objects.size(); i++) {
             AbstractGameObject go = objects.get(i);
             // 碰撞检测
-            for(int j = i + 1; j < objects.size(); j++) {
+            for (int j = i + 1; j < objects.size(); j++) {
                 for (Collider collider : colliders) {
                     collider.collide(go, objects.get(j));
                 }
             }
-            if(go.isLive()) {
+            if (go.isLive()) {
                 go.paint(g);
             }
         }
         /**
          * 移除死亡组件
          */
-        for(int i = 0; i < objects.size(); i++) {
+        for (int i = 0; i < objects.size(); i++) {
             AbstractGameObject object = objects.get(i);
-            if(!object.isLive()) {
+            if (!object.isLive()) {
                 objects.remove(object);
             }
         }

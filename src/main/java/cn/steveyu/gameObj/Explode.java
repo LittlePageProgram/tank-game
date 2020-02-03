@@ -23,12 +23,12 @@ public class Explode extends AbstractGameObject {
     }
 
     public void paint(Graphics g) {
-        if(!live) {
-            return ;
+        if (!live) {
+            return;
         }
         g.drawImage(ResourceMgr.explodes[step], x, y, null);
         step++;
-        if(step >= ResourceMgr.explodes.length) {
+        if (step >= ResourceMgr.explodes.length) {
             live = false;
             step = 0;
         }
