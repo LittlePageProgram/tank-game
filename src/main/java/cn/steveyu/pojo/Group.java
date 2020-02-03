@@ -1,4 +1,4 @@
-package cn.steveyu.gameObj;
+package cn.steveyu.pojo;
 
 /**
  * 队伍枚举

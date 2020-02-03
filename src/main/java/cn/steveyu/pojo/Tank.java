@@ -1,6 +1,6 @@
-package cn.steveyu.gameObj;
+package cn.steveyu.pojo;
 
-import cn.steveyu.mgr.ResourceMgr;
+import cn.steveyu.manager.ResourceMgr;
 import cn.steveyu.run.TankFrame;
 import lombok.Data;
 
@@ -108,7 +108,7 @@ public class Tank extends AbstractGameObject {
      */
     private void fire() {
         if (random.nextInt(100) > 98) {
-            TankFrame.INSTANCE.add(new Bullet(x, y, dir, Group.BAD));
+            TankFrame.INSTANCE.gameModel.add(new Bullet(x, y, dir, Group.BAD));
         }
     }
 
@@ -117,7 +117,7 @@ public class Tank extends AbstractGameObject {
      */
     public void die() {
         this.setLive(false);
-        TankFrame.INSTANCE.add(new Explode(x, y));
+        TankFrame.INSTANCE.gameModel.add(new Explode(x, y));
     }
 
 

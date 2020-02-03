@@ -1,7 +1,7 @@
 # 配置文件，请勿随意修改
 
 # 初始坦克数量
-initTankCount = 5
+initTankCount = 10
 
 # 游戏宽度
 gameWidth = 800
@@ -10,4 +10,4 @@ gameWidth = 800
 gameHeight = 600
 
 # 碰撞器
-colliders = BulletTankCollider, BulletWallCollider, TankWallCollider, PlayerWallCollider, PlayerTankCollider
+colliders = BulletTankCollider, BulletWallCollider, TankWallCollider, PlayerWallCollider, PlayerTankCollider , PlayerBulletCollider

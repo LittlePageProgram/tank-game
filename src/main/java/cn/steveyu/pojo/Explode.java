@@ -1,6 +1,7 @@
-package cn.steveyu.gameObj;
+package cn.steveyu.pojo;
 
-import cn.steveyu.mgr.ResourceMgr;
+import cn.steveyu.manager.ResourceMgr;
+import cn.steveyu.utils.AudioUtils;
 import lombok.Data;
 
 import java.awt.*;
@@ -20,6 +21,7 @@ public class Explode extends AbstractGameObject {
         this.y = y;
         this.width = ResourceMgr.explodes[0].getWidth();
         this.height = ResourceMgr.explodes[0].getHeight();
+        new Thread(()->new AudioUtils("audio/explode.wav").play()).start();
     }
 
     public void paint(Graphics g) {

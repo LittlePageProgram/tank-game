@@ -1,11 +1,12 @@
 package cn.steveyu.run;
 
-import cn.steveyu.collide.Collider;
-import cn.steveyu.gameObj.*;
-import cn.steveyu.mgr.PropertyMgr;
+import cn.steveyu.collide.ColliderChain;
+import cn.steveyu.pojo.*;
+import cn.steveyu.manager.PropertyMgr;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,18 +17,12 @@ import java.util.Random;
 public class TankFrame extends Frame {
     public static TankFrame INSTANCE = null;
 
-    private Player myTank = new Player(100, 100, Dir.R);
-
-    private List<AbstractGameObject> objects = null;
-
-    private List<Collider> colliders = null;
-
-    private Random random = new Random();
-
     Image offScreenImage = null;
 
     public static final int GAME_WIDTH = Integer.parseInt(PropertyMgr.get("gameWidth"));
     public static final int GAME_HEIGHT = Integer.parseInt(PropertyMgr.get("gameHeight"));
+
+    public GameModel gameModel = new GameModel();
 
     private TankFrame() {
         this.setLocation(400, 100);
@@ -35,42 +30,9 @@ public class TankFrame extends Frame {
         this.setTitle("tank war");
         this.addWindowListener(new WindowCloseListener());
         this.addKeyListener(new TankKeyListener());
-        initColliders();
-        initGameObjects();
+        this.setResizable(false);
         this.setVisible(true);
         new Thread(new RepaintRunnable()).start();
-    }
-
-    private void initColliders() {
-        try {
-            colliders = new ArrayList<>();
-            String[] collidersNames = PropertyMgr.get("colliders").split(",");
-            for (String collidersName : collidersNames) {
-                Class<?> collideClazz = Class.forName("cn.steveyu.collide." + collidersName.trim());
-                Collider collider = (Collider) (collideClazz.getConstructor().newInstance());
-                colliders.add(collider);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void initGameObjects() {
-        objects = new ArrayList<>();
-        objects.add(myTank);
-        int tankCount = Integer.parseInt(PropertyMgr.get("initTankCount"));
-        this.addEnemyTank(tankCount);
-        this.add(new Wall(300, 200, 400, 50));
-    }
-
-    private void addEnemyTank(int tankNumber) {
-        for (int i = 0; i < tankNumber; i++) {
-            objects.add(new Tank(random.nextInt(GAME_WIDTH), random.nextInt(GAME_HEIGHT)));
-        }
-    }
-
-    public void add(AbstractGameObject abstractGameObject) {
-        objects.add(abstractGameObject);
     }
 
     public static TankFrame getInstance() {
@@ -117,34 +79,14 @@ public class TankFrame extends Frame {
         }
     }
 
+    /**
+     * 窗体绘制
+     *
+     * @param g 窗体画笔
+     */
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.white);
-        g.drawString("游戏组件个数：" + objects.size(), 10, 50);
-        g.setColor(c);
-
-        for (int i = 0; i < objects.size(); i++) {
-            AbstractGameObject go = objects.get(i);
-            // 碰撞检测
-            for (int j = i + 1; j < objects.size(); j++) {
-                for (Collider collider : colliders) {
-                    collider.collide(go, objects.get(j));
-                }
-            }
-            if (go.isLive()) {
-                go.paint(g);
-            }
-        }
-        /**
-         * 移除死亡组件
-         */
-        for (int i = 0; i < objects.size(); i++) {
-            AbstractGameObject object = objects.get(i);
-            if (!object.isLive()) {
-                objects.remove(object);
-            }
-        }
+        gameModel.paint(g);
     }
 
     /**
@@ -153,12 +95,67 @@ public class TankFrame extends Frame {
     private class TankKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            myTank.keyPressed(e);
+            if (e.getKeyCode() == KeyEvent.VK_S) {
+                save();
+            }
+            if(e.getKeyCode() == KeyEvent.VK_L) {
+                load();
+            }
+            gameModel.keyPressed(e);
         }
 
         @Override
         public void keyReleased(KeyEvent e) {
-            myTank.keyReleased(e);
+            gameModel.keyReleased(e);
+        }
+    }
+
+    /**
+     * 载入
+     */
+    private void load() {
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        try {
+            File f = new File("src/main/resources/data.dat");
+            fis = new FileInputStream(f);
+            ois = new ObjectInputStream(fis);
+            this.gameModel = (GameModel) (ois.readObject());
+        }catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if(ois != null) {
+                    ois.close();
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 保存
+     */
+    private void save() {
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+        try {
+            File f = new File("src/main/resources/data.dat");
+            fos = new FileOutputStream(f);
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(gameModel);
+            oos.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (oos != null) {
+                    oos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

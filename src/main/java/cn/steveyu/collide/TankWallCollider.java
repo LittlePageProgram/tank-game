@@ -1,8 +1,8 @@
 package cn.steveyu.collide;
 
-import cn.steveyu.gameObj.AbstractGameObject;
-import cn.steveyu.gameObj.Tank;
-import cn.steveyu.gameObj.Wall;
+import cn.steveyu.pojo.AbstractGameObject;
+import cn.steveyu.pojo.Tank;
+import cn.steveyu.pojo.Wall;
 
 /**
  * 坦克和墙对撞，坦克退后一步

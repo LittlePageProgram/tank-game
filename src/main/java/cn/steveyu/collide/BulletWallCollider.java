@@ -1,8 +1,8 @@
 package cn.steveyu.collide;
 
-import cn.steveyu.gameObj.AbstractGameObject;
-import cn.steveyu.gameObj.Bullet;
-import cn.steveyu.gameObj.Wall;
+import cn.steveyu.pojo.AbstractGameObject;
+import cn.steveyu.pojo.Bullet;
+import cn.steveyu.pojo.Wall;
 
 /**
  * 我方子弹碰到墙，子弹消失

@@ -1,19 +1,20 @@
-package cn.steveyu.gameObj;
+package cn.steveyu.pojo;
 
 import cn.steveyu.fire.FireStrategy;
 import cn.steveyu.fire.FourDirFireStrategy;
-import cn.steveyu.mgr.ResourceMgr;
+import cn.steveyu.manager.ResourceMgr;
 import cn.steveyu.run.TankFrame;
 import lombok.Data;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 
 /**
  * 玩家实体
  */
 @Data
-public class Player extends AbstractGameObject {
+public class Player extends AbstractGameObject implements Serializable {
     public static final int PLAYER_WIDTH = 50, PLAYER_HEIGHT = 50;
     private int x, y, oldX, oldY;
     private Dir dir;
@@ -187,7 +188,7 @@ public class Player extends AbstractGameObject {
 
     public void die() {
         this.setLive(false);
-        TankFrame.INSTANCE.add(new Explode(x, y));
+        TankFrame.INSTANCE.gameModel.add(new Explode(x, y));
     }
 
     public void back() {

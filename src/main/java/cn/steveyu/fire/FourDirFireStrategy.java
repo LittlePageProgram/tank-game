@@ -1,8 +1,8 @@
 package cn.steveyu.fire;
 
-import cn.steveyu.gameObj.Bullet;
-import cn.steveyu.gameObj.Dir;
-import cn.steveyu.gameObj.Player;
+import cn.steveyu.pojo.Bullet;
+import cn.steveyu.pojo.Dir;
+import cn.steveyu.pojo.Player;
 import cn.steveyu.run.TankFrame;
 
 /**
@@ -12,7 +12,7 @@ public class FourDirFireStrategy implements FireStrategy {
     @Override
     public void fire(Player player) {
         for (Dir dir : Dir.values()) {
-            TankFrame.INSTANCE.add(new Bullet(player.getX(), player.getY(), dir, player.getGroup()));
+            TankFrame.INSTANCE.gameModel.add(new Bullet(player.getX(), player.getY(), dir, player.getGroup()));
         }
     }
 }

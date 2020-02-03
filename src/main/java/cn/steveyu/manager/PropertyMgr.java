@@ -1,4 +1,4 @@
-package cn.steveyu.mgr;
+package cn.steveyu.manager;
 
 import java.io.IOException;
 import java.util.Properties;

@@ -1,4 +1,4 @@
-package cn.steveyu.gameObj;
+package cn.steveyu.pojo;
 
 import lombok.Data;
 
@@ -26,8 +26,8 @@ public class Wall extends AbstractGameObject {
         g.setColor(Color.GRAY);
         g.fillRect(x, y, w, h);
 
-        g.setColor(Color.YELLOW);
-        g.drawRect(rect.x, rect.y, rect.width, rect.height);
+//        g.setColor(Color.YELLOW);
+//        g.drawRect(rect.x, rect.y, rect.width, rect.height);
         g.setColor(c);
     }
 }

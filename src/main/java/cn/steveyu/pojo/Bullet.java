@@ -1,6 +1,6 @@
-package cn.steveyu.gameObj;
+package cn.steveyu.pojo;
 
-import cn.steveyu.mgr.ResourceMgr;
+import cn.steveyu.manager.ResourceMgr;
 import cn.steveyu.run.TankFrame;
 import lombok.Data;
 

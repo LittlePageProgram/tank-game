@@ -1,8 +1,8 @@
 package cn.steveyu.collide;
 
-import cn.steveyu.gameObj.AbstractGameObject;
-import cn.steveyu.gameObj.Player;
-import cn.steveyu.gameObj.Tank;
+import cn.steveyu.pojo.AbstractGameObject;
+import cn.steveyu.pojo.Player;
+import cn.steveyu.pojo.Tank;
 
 /**
  * 玩家碰到敌军坦克，玩家死亡

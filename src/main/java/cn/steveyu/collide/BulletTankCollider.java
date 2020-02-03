@@ -1,6 +1,6 @@
 package cn.steveyu.collide;
 
-import cn.steveyu.gameObj.*;
+import cn.steveyu.pojo.*;
 
 /**
  * 我放子弹敌方坦克碰撞器

@@ -1,8 +1,8 @@
 package cn.steveyu.collide;
 
-import cn.steveyu.gameObj.AbstractGameObject;
-import cn.steveyu.gameObj.Player;
-import cn.steveyu.gameObj.Wall;
+import cn.steveyu.pojo.AbstractGameObject;
+import cn.steveyu.pojo.Player;
+import cn.steveyu.pojo.Wall;
 
 /**
  * 玩家和墙接触，玩家退后一步
